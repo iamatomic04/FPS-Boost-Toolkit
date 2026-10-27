@@ -1,46 +1,62 @@
 # ⚡ FPS Boost Toolkit
 
-> Một công cụ mã nguồn mở siêu nhẹ được viết bằng **C++**, giúp tối ưu hóa hệ thống Windows, tinh chỉnh cấu hình và tối ưu hiệu năng chơi game.
+> Một công cụ tối ưu hóa hệ thống Windows siêu nhẹ viết bằng **C++17**, giúp tăng cường hiệu năng chơi game, chuyển đổi chế độ điện năng (Power Plan) và dọn dẹp file tạm an toàn mà không làm ảnh hưởng đến hệ thống.
+
+![C++17](https://img.shields.io/badge/C%2B%2B-17-blue?style=flat-square&logo=cplusplus)
+![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?style=flat-square&logo=windows)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
 ---
 
 ## 📑 Mục lục
-- [Tính năng](#-tính-năng)
+- [Tính năng chính](#-tính-năng-chính)
+- [Cơ chế hoạt động & An toàn](#-cơ-chế-hoạt-động--an-toàn)
 - [Yêu cầu hệ thống](#-yêu-cầu-hệ-thống)
-- [Hướng dẫn Build & Cài đặt](#-hướng-dẫn-build--cài-đặt)
+- [Hướng dẫn Build từ Mã nguồn](#-hướng-dẫn-build-từ-mã-nguồn)
+- [Cách sử dụng chi tiết](#-cách-sử-dụng-chi-tiết)
+- [Lưu ý quan trọng](#-lưu-ý-quan-trọng)
 - [Giấy phép](#-giấy-phép)
 
 ---
 
-## 🚀 Tính năng
+## 🚀 Tính năng chính
 
-| Tính năng | Mô tả |
+| Tính năng | Mô tả chi tiết |
 | :--- | :--- |
-| **Lightweight C++** | Được viết hoàn toàn bằng C++, tiêu tốn ít hơn 15MB RAM khi chạy ngầm. |
-| **Config & FastFlag** | Tùy chỉnh nhanh các thông số ẩn để tối ưu FPS cho game. |
-| **System Cleaner** | Tự động dọn dẹp file tạm (Temp) và chuyển đổi Windows Power Plan sang High Performance. |
-| **Safe & Backup** | Tích hợp tính năng sao lưu và khôi phục cài đặt gốc chỉ với 1 cú click. |
+| **1. Show Current Plan** | Kiểm tra nhanh chế độ điện năng đang được kích hoạt trên hệ thống Windows. |
+| **2. High Performance** | Kích hoạt chế độ hiệu năng cao, ép xung nhịp CPU tối đa để giảm giật lag khi chơi game. |
+| **3. Ultimate Performance** | Mở khóa chế độ hiệu năng cực đại dành riêng cho các dòng máy cấu hình cao. |
+| **4. Restore Balanced** | Khôi phục lại chế độ điện năng Cân bằng (Balanced) mặc định khi không chơi game. |
+| **5. Clean User Temp** | Dọn dẹp thư mục file tạm cá nhân (`%TEMP%`), tự động bỏ qua file đang bị ứng dụng chiếm dụng. |
+| **6. Clean Windows Temp** | Dọn dẹp thư mục file tạm hệ thống (yêu cầu quyền Administrator). |
+
+---
+
+## 🛡️ Cơ chế hoạt động & An toàn
+
+- **Chống giả mạo lệnh (`powercfg`):** Sử dụng đường dẫn hệ thống tuyệt đối (`%SystemRoot%\System32\powercfg.exe`) để ngăn chặn tuyệt đối rủi ro chạy nhầm các file thực thi giả mạo đặt tại thư mục tải về (Downloads).
+- **Bảo vệ thư mục cá nhân:** Tool kiểm tra kỹ biến môi trường `TEMP/TMP`. Nếu không tồn tại, chương trình sẽ **từ chối dọn dẹp** thay vì xóa nhầm sang thư mục người dùng (`Documents`, `Desktop`,...).
+- **Không ép buộc xóa:** Các tệp tin đang mở hoặc bị khóa bởi ứng dụng khác sẽ được bỏ qua an toàn (`skipped`), không làm treo hay crash ứng dụng.
 
 ---
 
 ## 💻 Yêu cầu hệ thống
 
 - **Hệ điều hành:** Windows 10 / 11 (64-bit)
-- **Compiler:** Visual Studio 2022 (MSVC) hoặc MinGW-w64
-- **Build Tool:** CMake 3.16 trở lên
+- **Trình biên dịch:** Hỗ trợ chuẩn **C++17** trở lên (`<filesystem>`):
+  - **Visual Studio 2022** (MSVC)
+  - **MinGW-w64** (GCC 9 trở lên)
 
 ---
 
 ## ⚙️ Hướng dẫn Build từ Mã nguồn
 
+### 1. Trên Visual Studio 2022 (MSVC)
+1. Mở Project Properties trong Visual Studio.
+2. Vào **C/C++** ➔ **Language** ➔ Mục **C++ Language Standard** chọn **ISO C++17 (/std:c++17)**.
+3. Chọn cấu hình **Release** và tiến hành Build (`Ctrl + Shift + B`).
+
+### 2. Trên MinGW (Dòng lệnh GCC)
+Mở terminal và chạy lệnh biên dịch tối ưu hóa:
 ```bash
-# 1. Clone repository về máy
-git clone [https://github.com/iamatomic04/FPS-Boost-Toolkit.git](https://github.com/iamatomic04/FPS-Boost-Toolkit.git)
-cd FPS-Boost-Toolkit
-
-# 2. Tạo thư mục build
-mkdir build && cd build
-
-# 3. Cấu hình và biên dịch bằng CMake
-cmake ..
-cmake --build . --config Release
+g++ -std=c++17 -O2 main.cpp -o fps_boost.exe
