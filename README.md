@@ -12,8 +12,8 @@
 - [Tính năng chính](#-tính-năng-chính)
 - [Cơ chế hoạt động & An toàn](#-cơ-chế-hoạt-động--an-toàn)
 - [Yêu cầu hệ thống](#-yêu-cầu-hệ-thống)
+- [Hướng dẫn sử dụng](#-hướng-dẫn-sử-dụng)
 - [Hướng dẫn Build từ Mã nguồn](#-hướng-dẫn-build-từ-mã-nguồn)
-- [Cách sử dụng chi tiết](#-cách-sử-dụng-chi-tiết)
 - [Lưu ý quan trọng](#-lưu-ý-quan-trọng)
 - [Giấy phép](#-giấy-phép)
 
@@ -43,20 +43,30 @@
 ## 💻 Yêu cầu hệ thống
 
 - **Hệ điều hành:** Windows 10 / 11 (64-bit)
-- **Trình biên dịch:** Hỗ trợ chuẩn **C++17** trở lên (`<filesystem>`):
-  - **Visual Studio 2022** (MSVC)
-  - **MinGW-w64** (GCC 9 trở lên)
+- **Quyền hạn:** Khuyến nghị chạy dưới quyền **Administrator** (Run as Administrator) để công cụ có đầy đủ quyền áp dụng Power Plan và xóa file tạm hệ thống.
 
 ---
 
-## ⚙️ Hướng dẫn Build từ Mã nguồn
+## 📥 Hướng dẫn sử dụng
 
-### 1. Trên Visual Studio 2022 (MSVC)
+Bạn có thể lựa chọn 1 trong 2 cách sử dụng dưới đây:
+
+### 🌟 Cách 1: Tải file `.exe` có sẵn (Khuyên dùng - Nhanh nhất)
+1. Truy cập vào mục **[Releases](https://github.com/iamatomic04/FPS-Boost-Toolkit/releases)** ở cột bên phải trang repo này.
+2. Tải về file thực thi **`FPS-Boost-Toolkit.exe`** mới nhất từ bản **v1.0.0**.
+3. Nhấp chuột phải vào file `FPS-Boost-Toolkit.exe` và chọn **Run as administrator** (Chạy dưới quyền Quản trị viên).
+4. Chọn các số tương ứng trên menu giao diện Console để thực hiện tối ưu hóa hệ thống.
+
+---
+
+### 🛠️ Cách 2: Tự biên dịch từ Mã nguồn (Dành cho Developer)
+
+#### 1. Trên Visual Studio 2022 (MSVC)
 1. Mở Project Properties trong Visual Studio.
 2. Vào **C/C++** ➔ **Language** ➔ Mục **C++ Language Standard** chọn **ISO C++17 (/std:c++17)**.
 3. Chọn cấu hình **Release** và tiến hành Build (`Ctrl + Shift + B`).
 
-### 2. Trên MinGW (Dòng lệnh GCC)
-Mở terminal và chạy lệnh biên dịch tối ưu hóa:
+#### 2. Trên MinGW (Dòng lệnh GCC)
+Mở terminal tại thư mục chứa mã nguồn và chạy lệnh biên dịch:
 ```bash
-g++ -std=c++17 -O2 main.cpp -o fps_boost.exe
+g++ -std=c++17 -O2 main.cpp -o FPS-Boost-Toolkit.exe
